@@ -1,290 +1,300 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sunrise English Center</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Rubik&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      text-decoration: none;
-      list-style: none;
-    }
-
-    html {
-      overflow-x: hidden;
-    }
-
-    .navbar-brand {
-      font-size: 2rem;
-      color: back;
-      font-family: 'Lobster', cursive;
-    }
-
-    .navbar-brand:hover {
-      color: black;
-    }
-
-    .navbar .logo {
-      width: 70px;
-      border-radius: 50%;
-    }
-
-    .nav-link {
-      margin-right: 10px;
-      margin-left: 10px;
-      color: black;
-      text-transform: uppercase;
-      font-family: 'Rubik', sans-serif;
-    }
-
-    .navbar a {
-      color: #ffef01;
-    }
-
-    .nav-link:hover {
-      color: black;
-    }
-
-    .search {
-      height: 40px;
-      width: 80%;
-      border-radius: 60px;
-      outline: none;
-      margin-right: -35px;
-      font-family: 'Rubik', sans-serif;
-      border: 2px solid #ffef01;
-    }
-
-    .btn0 {
-      height: 40px;
-      width: 40%;
-      outline: none;
-      border: none;
-      background: #ffef01;
-      color: white;
-      border-radius: 60%;
-      font-weight: 700;
-    }
-
-    .main {
-      background: url(./sunrise.jpg);
-      max-width: 100%;
-      height: 70vh;
-      background-repeat: no-repeat;
-      background-size: cover;
-      overflow-x: hidden;
-      background-position: center;
-    }
-
-    h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #ffef01;
-    }
-
-    .btn1 {
-      height: 45px;
-      width: 35%;
-      border: none;
-      outline: none;
-      background-color: #ffef01;
-      color: #fff;
-      font-weight: 700;
-      border-radius: 60px;
-    }
-
-    .btn1:hover {
-      background-color: #00324f;
-      transition: 0.5s;
-    }
-
-    .card:hover {
-      box-shadow: -2px -1px 25px -4px rgba(0, 0, 0, 0.75);
-      -webkit-shadow: -2px -1px 25px -4px rgba(0, 0, 0, 0.75);
-      -moz-box-shadow: -2px -1px 25px -4px rgba(0, 0, 0, 0.75);
-    }
-
-
-
-    /* Responsive mode */
-    @media screen and (max-width: 1024px) {
-      .main {
-        background: url(./sunrise.jpg);
-        width: 100%;
-        min-height: 100%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        overflow-x: hidden;
-        background-position: center;
-        align-items: center;
-        justify-content: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise English Center - Illuminate Your Language Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sunrise: {
+                            50: '#fff9e6',
+                            100: '#ffedb3',
+                            200: '#ffe180',
+                            300: '#ffd54d',
+                            400: '#ffc91a',
+                            500: '#ffbd00',
+                            600: '#cc9700',
+                            700: '#997100',
+                            800: '#664b00',
+                            900: '#332600',
+                        },
+                        ocean: {
+                            50: '#e6f3ff',
+                            100: '#b3deff',
+                            200: '#80c9ff',
+                            300: '#4db4ff',
+                            400: '#1a9fff',
+                            500: '#008aff',
+                            600: '#006ecc',
+                            700: '#005399',
+                            800: '#003766',
+                            900: '#001c33',
+                        },
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 </head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg " style="background-color: #00324f;">
-    <div class="container">
-      <a class="navbar-brand " href="#"><img src="./logo.jpg" alt="logo" class="logo"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav m-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link " href="#">HOME</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">ABOUT US</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link dropdown-toggle" href="#" >
-              OUR TRAINING             
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " >CONTACT</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class=" px-2 search" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn0 " type="submit" id="btn0">Recherche</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Main Section -->
-  <section class="main ">
-    <div class="container py-5">
-      <div class="row py-4  d-flex justify-content-around">
-        <div class="col-lg-7 mt-5 pt-5 text-center">
-          <h1 class="pt-5 mt-5 text-light txt_main">WELCOME TO SUNRISE</h1>
-          <button class="btn1 mt-4">LEARN MORE</button>
+<body class="font-poppins antialiased bg-gray-50 text-gray-800">
+  <header x-data="{ isOpen: false }" class="bg-white shadow-sm sticky top-0 z-50">
+    <nav class="container mx-auto px-6 py-3">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" class="flex items-center">
+                    <img src="./logo.jpg" alt="Sunrise English Center Logo" class="w-12 h-12 rounded-full mr-3">
+                    <span class="text-2xl font-bold">
+                        <span class="text-sunrise-500">Sunrise</span>
+                        <span class="text-ocean-500">English</span>
+                    </span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-sunrise-500 transition">Home</a>
+                <a href="#courses" class="text-gray-700 hover:text-sunrise-500 transition">Courses</a>
+                <a href="#about" class="text-gray-700 hover:text-sunrise-500 transition">About Us</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-sunrise-500 transition">Testimonials</a>
+                <a href="#contact" class="bg-sunrise-500 text-white px-4 py-2 rounded-full hover:bg-sunrise-600 transition">Contact Us</a>
+            </div>
+            <button @click="isOpen = !isOpen" class="md:hidden">
+                <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                    <path x-show="!isOpen" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
+                    <path x-show="isOpen" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
         </div>
-      </div>
-    </div>
-  </section>
+        <div x-show="isOpen" x-transition class="md:hidden mt-4">
+            <a href="#home" class="block py-2 text-gray-700 hover:text-sunrise-500">Home</a>
+            <a href="#courses" class="block py-2 text-gray-700 hover:text-sunrise-500">Courses</a>
+            <a href="#about" class="block py-2 text-gray-700 hover:text-sunrise-500">About Us</a>
+            <a href="#testimonials" class="block py-2 text-gray-700 hover:text-sunrise-500">Testimonials</a>
+            <a href="#contact" class="block py-2 text-sunrise-500 font-semibold">Contact Us</a>
+        </div>
+    </nav>
+</header>
 
-  <!-- About Us Section -->
-  <section class="about">
-    <div class="container py-5">
-      <div class="row py-5">
-        <div class="col-lg-8 m-auto text-center">
-          <h1>Welcome to Sunrise English Center</h1>
-          <p>We are dedicated to providing high-quality English language education in a supportive and nurturing environment. Our experienced instructors use innovative teaching methods to help students achieve their language learning goals.</p>
-          <p>At Sunrise English Center, we believe that learning English should be
+    <main>
+        <section id="home" class="bg-gradient-to-r from-ocean-500 to-sunrise-500 text-white py-20">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-4">Illuminate Your Language Journey</h1>
+                        <p class="text-xl mb-8">Join Sunrise English Center and brighten your future with fluent English skills.</p>
+                        <a href="#courses" class="bg-white text-ocean-500 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">Explore Courses</a>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="sunrise.jpg" alt="Students learning English" class="rounded-lg shadow-xl">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            an enjoyable and rewarding experience. Whether you are a beginner or an advanced learner, we offer courses tailored to your needs and proficiency level.</p>
-            <p>Contact us today to learn more about our programs and start your journey to English proficiency!</p>
-            </div>
-            </div>
-            </div>
-            
-              </section>
-              <!-- Product Section -->
-              <section class="product">
-                <div class="container py-5">
-                  <div class="row ">
-                    <div class="col-lg-5 m-auto text-center">
-                      <h1>Our Products</h1>
-                      <h6>Discover our selection of high-quality English language courses</h6>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-3 text-center mb-2">
-                      <div class="card border-0 bg-light">
-                        <div class="card-body">
-                          <img src="men.jpg" class="img-fluid" alt="">
+        <section id="courses" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Our Courses</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                        <img src="conversation.jpg" alt="English Conversation" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">English Conversation</h3>
+                            <p class="text-gray-600 mb-4">Boost your confidence in speaking English in various situations.</p>
+                            <span class="text-sunrise-500 font-semibold">$200</span>
                         </div>
-                      </div>
-                      <h6>English Conversation Course</h6>
-                      <p>$200</p>
                     </div>
-                
-                    <div class="col-lg-3 text-center mb-2">
-                      <div class="card border-0 bg-light">
-                        <div class="card-body">
-                          <img src="men.jpg" class="img-fluid" alt="">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                        <img src="business.jpg" alt="Business English" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Business English</h3>
+                            <p class="text-gray-600 mb-4">Master the language skills needed for professional success.</p>
+                            <span class="text-sunrise-500 font-semibold">$300</span>
                         </div>
-                      </div>
-                      <h6>IELTS Preparation Course</h6>
-                      <p>$250</p>
                     </div>
-                
-                    <div class="col-lg-3 text-center mb-2">
-                      <div class="card border-0 bg-light">
-                        <div class="card-body">
-                          <img src="men.jpg" class="img-fluid" alt="">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                        <img src="ielts.jpg" alt="IELTS Preparation" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">IELTS Preparation</h3>
+                            <p class="text-gray-600 mb-4">Get ready to ace your IELTS exam with our focused course.</p>
+                            <span class="text-sunrise-500 font-semibold">$250</span>
                         </div>
-                      </div>
-                      <h6>Business English Course</h6>
-                      <p>$300</p>
                     </div>
-                
-                    <div class="col-lg-3 text-center mb-2">
-                      <div class="card border-0 bg-light">
-                        <div class="card-body">
-                          <img src="men.jpg" class="img-fluid" alt="">
-                        </div>
-                      </div>
-                      <h6>TOEFL Preparation Course</h6>
-                      <p>$280</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6 text-center m-auto">
-                      <button class="btn1">View All Courses</button>
-                    </div> 
-                  </div>
                 </div>
-              </section>
-              <!-- About Section -->
-              <section class="about">
-                <div class="container py-5">
-                  <div class="row py-5">
-                    <div class="col-lg-8 m-auto text-center">
-                      <h1>Why Choose Sunrise English Center?</h1>
-                      <p>We understand that there are many options when it comes to choosing an English language school. Here are a few reasons why we believe Sunrise English Center stands out:</p>
-                      <ul>
-                        <li>Experienced Instructors: Our teachers are highly qualified and experienced professionals who are passionate about teaching English.</li>
-                        <li>Interactive Learning: We use innovative teaching methods and interactive materials to make learning engaging and enjoyable.</li>
-                        <li>Personalized Approach: We offer personalized attention and tailor our courses to meet the individual needs and goals of each student.</li>
-                        <li>Friendly Environment: Our school provides a supportive and inclusive environment where students feel comfortable practicing and improving their English skills.</li>
-                      </ul>
-                      <p>Join us at Sunrise English Center and experience the difference for yourself!</p>
-                    </div>
-                  </div>
+                <div class="text-center mt-12">
+                    <a href="#" class="bg-sunrise-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-sunrise-600 transition">View All Courses</a>
                 </div>
-              </section>
-              <!-- Application Section -->
-              <section class="appl">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <h1>Ready to Get Started?</h1>
-                      <h5>Contact us today to schedule a placement test and start your English language journey!</h5>
-                      <button class="btn1  mt-3">Contact Us</button>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <img src="about-us.jpg" alt="Our teaching approach" class="rounded-lg shadow-xl">
                     </div>
-                  </div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <h2 class="text-3xl font-bold mb-6">About Sunrise English Center</h2>
+                        <p class="text-gray-600 mb-6">At Sunrise English Center, we believe in illuminating the path to English fluency. Our experienced instructors use innovative methods to make learning engaging and effective.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <svg class="h-6 w-6 text-sunrise-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Small class sizes for personalized attention
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="h-6 w-6 text-sunrise-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Interactive learning with modern technology
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="h-6 w-6 text-sunrise-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Customized curriculum for various learning goals
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-              </section>
-              <script>
-                let btn = document.getElementById("btn0");
-            
-                btn.addEventListener("click", () => {
-                  alert("This feature is not available at the moment. Thank you for your understanding!");
-                });
-              </script>
-              <script src="./bootstrap/js/bootstrap.min.js"></script>
-              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-            </body>
-            </html>    
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-20 bg-ocean-500 text-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">What Our Students Say</h2>
+                <div x-data="{ testimonialIndex: 0 }" class="relative">
+                    <div class="overflow-hidden">
+                        <div class="flex transition-transform duration-300 ease-in-out" :style="{ transform: `translateX(-${testimonialIndex * 100}%)` }">
+                            <div class="w-full flex-shrink-0 px-4">
+                                <blockquote class="text-center">
+                                    <p class="text-xl italic mb-4">"Sunrise English Center transformed my English skills. The teachers are fantastic and the atmosphere is so welcoming!"</p>
+                                    <cite class="font-semibold">- Big J., 
+                                </blockquote>
+                            </div>
+                            <div class="w-full flex-shrink-0 px-4">
+                                <blockquote class="text-center">
+                                    <p class="text-xl italic mb-4">"The Business English course helped me secure a promotion at work. I'm so glad I chose Sunrise!"</p>
+                                    <cite class="font-semibold">- King of king., Business Professional
+                                </blockquote>
+                            </div>
+                            <div class="w-full flex-shrink-0 px-4">
+                                <blockquote class="text-center">
+                                    <p class="text-xl italic mb-4">"I've tried other language schools, but none compare to the quality of instruction at Sunrise English Center."</p>
+                                    <cite class="font-semibold">- Big Pravy., Conversation Course Graduate
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                    <button @click="testimonialIndex = (testimonialIndex - 1 + 3) % 3" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white text-ocean-500 rounded-full p-2 shadow-md hover:bg-gray-100">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button @click="testimonialIndex = (testimonialIndex + 1) % 3" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white text-ocean-500 rounded-full p-2 shadow-md hover:bg-gray-100">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Contact Us</h2>
+                <div class="max-w-lg mx-auto">
+                    <form x-data="{ name: '', email: '', message: '', success: false }" @submit.prevent="success = true; setTimeout(() => success = false, 3000);" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-2">Name</label>
+                            <input type="text" id="name" x-model="name" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-sunrise-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" x-model="email" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-sunrise-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-2">Message</label>
+                            <textarea id="message" x-model="message" required rows="4" class="w-full px-4 py-2 border rounded-lg focus:
+                            
+                            
+                            <textarea id="message" x-model="message" required rows="4" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-sunrise-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-sunrise-500 text-white py-3 rounded-lg font-semibold hover:bg-sunrise-600 transition">Send Message</button>
+                        <div x-show="success" x-transition class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                            <strong class="font-bold">Success!</strong>
+                            <span class="block sm:inline">Your message has been sent.</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Sunrise English Center</h3>
+                    <p class="text-gray-400">Let's shine like the sun.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#courses" class="text-gray-400 hover:text-white transition">Courses</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Saint Pierre claver, Bacong-Brazzaville</li>
+                        <li>Phone: (+242) 06 403 66 04</li>
+                        <li>Email: sunsoleil814@gmail.com</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.954 4.569c-.885.389-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.951.555-2.005.959-3.127 1.184-.896-.959-2.173-1.559-3.591-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39.045.765.127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427.722-.666 1.561-.666 2.475 0 1.71.87 3.213 2.188 4.096-.807-.026-1.566-.248-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.68 1.319-3.809 2.105-6.102 2.105-.39 0-.779-.023-1.17-.067 2.189 1.394 4.768 2.209 7.557 2.209 9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63.961-.689 1.8-1.56 2.46-2.548l-.047-.02z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Sunrise English Center. All rights reserved. by big Adhonaï</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // You can add any additional JavaScript here
+    </script>
+</body>
+</html>
