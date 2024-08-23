@@ -130,6 +130,51 @@
             </div>
         </section>
 
+        <section id="level-quiz" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Test Your English Level</h2>
+                <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg" x-data="quizData()">
+                    <div x-show="!quizCompleted">
+                        <h3 class="text-xl font-semibold mb-4" x-text="currentQuestion.question"></h3>
+                        <div class="space-y-4">
+                            <template x-for="(option, index) in currentQuestion.options" :key="index">
+                                <button 
+                                    class="w-full text-left p-4 rounded border border-gray-300 hover:bg-gray-100 transition"
+                                    x-text="option"
+                                    @click="selectAnswer(index)"
+                                ></button>
+                            </template>
+                        </div>
+                        <div class="mt-6 flex justify-between">
+                            <button 
+                                class="bg-ocean-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-ocean-600 transition"
+                                x-show="currentQuestionIndex > 0"
+                                @click="previousQuestion"
+                            >Previous</button>
+                            <button 
+                                class="bg-sunrise-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-sunrise-600 transition"
+                                x-show="currentQuestionIndex < questions.length - 1"
+                                @click="nextQuestion"
+                            >Next</button>
+                            <button 
+                                class="bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition"
+                                x-show="currentQuestionIndex === questions.length - 1"
+                                @click="completeQuiz"
+                            >Finish Quiz</button>
+                        </div>
+                    </div>
+                    <div x-show="quizCompleted" class="text-center">
+                        <h3 class="text-2xl font-bold mb-4">Your English Level:</h3>
+                        <p class="text-xl mb-6" x-text="quizResult"></p>
+                        <button 
+                            class="bg-sunrise-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-sunrise-600 transition"
+                            @click="resetQuiz"
+                        >Retake Quiz</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="about" class="py-20 bg-gray-100">
             <div class="container mx-auto px-6">
                 <div class="flex flex-col md:flex-row items-center">
@@ -246,7 +291,7 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray<li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
                         <li><a href="#courses" class="text-gray-400 hover:text-white transition">Courses</a></li>
                         <li><a href="#about" class="text-gray-400 hover:text-white transition">About Us</a></li>
                         <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
@@ -403,6 +448,115 @@
         });
 
         showCourses();
+
+        function quizData() {
+            return {
+                questions: [
+                    {
+                        question: "Choose the correct sentence:",
+                        options: [
+                            "I am student.",
+                            "I am a student.",
+                            "I a student.",
+                            "I the student."
+                        ],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "What's the past tense of 'go'?",
+                        options: [
+                            "Goed",
+                            "Gone",
+                            "Went",
+                            "Going"
+                        ],
+                        correctAnswer: 2
+                    },
+                    {
+                        question: "Which sentence is in the present perfect tense?",
+                        options: [
+                            "I will visit London next year.",
+                            "I visited London last year.",
+                            "I am visiting London now.",
+                            "I have visited London twice."
+                        ],
+                        correctAnswer: 3
+                    },
+                    {
+                        question: "Choose the correct conditional sentence:",
+                        options: [
+                            "If it rains, I stay at home.",
+                            "If it rains, I will stay at home.",
+                            "If it rained, I would stay at home.",
+                            "If it rained, I stay at home."
+                        ],
+                        correctAnswer: 1
+                    },
+                    {
+                        question: "Which word is a synonym for 'beautiful'?",
+                        options: [
+                            "Ugly",
+                            "Pretty",
+                            "Horrible",
+                            "Disgusting"
+                        ],
+                        correctAnswer: 1
+                    }
+                ],
+                currentQuestionIndex: 0,
+                userAnswers: [],
+                quizCompleted: false,
+                quizResult: '',
+
+                get currentQuestion() {
+                    return this.questions[this.currentQuestionIndex];
+                },
+
+                selectAnswer(index) {
+                    this.userAnswers[this.currentQuestionIndex] = index;
+                },
+
+                nextQuestion() {
+                    if (this.currentQuestionIndex < this.questions.length - 1) {
+                        this.currentQuestionIndex++;
+                    }
+                },
+
+                previousQuestion() {
+                    if (this.currentQuestionIndex > 0) {
+                        this.currentQuestionIndex--;
+                    }
+                },
+
+                completeQuiz() {
+                    let correctAnswers = 0;
+                    this.questions.forEach((question, index) => {
+                        if (this.userAnswers[index] === question.correctAnswer) {
+                            correctAnswers++;
+                        }
+                    });
+
+                    const percentage = (correctAnswers / this.questions.length) * 100;
+
+                    if (percentage >= 80) {
+                        this.quizResult = "Advanced - You have an excellent grasp of English!";
+                    } else if (percentage >= 60) {
+                        this.quizResult = "Intermediate - You have a good understanding of English, but there's room for improvement.";
+                    } else {
+                        this.quizResult = "Beginner - You're just starting your English journey. Keep learning!";
+                    }
+
+                    this.quizCompleted = true;
+                },
+
+                resetQuiz() {
+                    this.currentQuestionIndex = 0;
+                    this.userAnswers = [];
+                    this.quizCompleted = false;
+                    this.quizResult = '';
+                }
+            }
+        }
     </script>
 </body>
 </html>
