@@ -133,43 +133,19 @@
         <section id="level-quiz" class="py-20 bg-gray-100">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-center mb-12">Test Your English Level</h2>
-                <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg" x-data="quizData()">
-                    <div x-show="!quizCompleted">
-                        <h3 class="text-xl font-semibold mb-4" x-text="currentQuestion.question"></h3>
-                        <div class="space-y-4">
-                            <template x-for="(option, index) in currentQuestion.options" :key="index">
-                                <button 
-                                    class="w-full text-left p-4 rounded border border-gray-300 hover:bg-gray-100 transition"
-                                    x-text="option"
-                                    @click="selectAnswer(index)"
-                                ></button>
-                            </template>
-                        </div>
+                <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg" id="quizContainer">
+                    <div id="quizQuestions">
+                        <h3 class="text-xl font-semibold mb-4" id="currentQuestion"></h3>
+                        <div class="space-y-4" id="answerOptions"></div>
                         <div class="mt-6 flex justify-between">
-                            <button 
-                                class="bg-ocean-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-ocean-600 transition"
-                                x-show="currentQuestionIndex > 0"
-                                @click="previousQuestion"
-                            >Previous</button>
-                            <button 
-                                class="bg-sunrise-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-sunrise-600 transition"
-                                x-show="currentQuestionIndex < questions.length - 1"
-                                @click="nextQuestion"
-                            >Next</button>
-                            <button 
-                                class="bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition"
-                                x-show="currentQuestionIndex === questions.length - 1"
-                                @click="completeQuiz"
-                            >Finish Quiz</button>
+                            <button id="prevButton" class="bg-ocean-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-ocean-600 transition">Previous</button>
+                            <button id="nextButton" class="bg-sunrise-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-sunrise-600 transition">Next</button>
                         </div>
                     </div>
-                    <div x-show="quizCompleted" class="text-center">
+                    <div id="quizResult" class="text-center" style="display: none;">
                         <h3 class="text-2xl font-bold mb-4">Your English Level:</h3>
-                        <p class="text-xl mb-6" x-text="quizResult"></p>
-                        <button 
-                            class="bg-sunrise-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-sunrise-600 transition"
-                            @click="resetQuiz"
-                        >Retake Quiz</button>
+                        <p class="text-xl mb-6" id="resultText"></p>
+                        <button id="retakeButton" class="bg-sunrise-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-sunrise-600 transition">Retake Quiz</button>
                     </div>
                 </div>
             </div>
@@ -449,114 +425,122 @@
 
         showCourses();
 
-        function quizData() {
-            return {
-                questions: [
-                    {
-                        question: "Choose the correct sentence:",
-                        options: [
-                            "I am student.",
-                            "I am a student.",
-                            "I a student.",
-                            "I the student."
-                        ],
-                        correctAnswer: 1
-                    },
-                    {
-                        question: "What's the past tense of 'go'?",
-                        options: [
-                            "Goed",
-                            "Gone",
-                            "Went",
-                            "Going"
-                        ],
-                        correctAnswer: 2
-                    },
-                    {
-                        question: "Which sentence is in the present perfect tense?",
-                        options: [
-                            "I will visit London next year.",
-                            "I visited London last year.",
-                            "I am visiting London now.",
-                            "I have visited London twice."
-                        ],
-                        correctAnswer: 3
-                    },
-                    {
-                        question: "Choose the correct conditional sentence:",
-                        options: [
-                            "If it rains, I stay at home.",
-                            "If it rains, I will stay at home.",
-                            "If it rained, I would stay at home.",
-                            "If it rained, I stay at home."
-                        ],
-                        correctAnswer: 1
-                    },
-                    {
-                        question: "Which word is a synonym for 'beautiful'?",
-                        options: [
-                            "Ugly",
-                            "Pretty",
-                            "Horrible",
-                            "Disgusting"
-                        ],
-                        correctAnswer: 1
-                    }
-                ],
-                currentQuestionIndex: 0,
-                userAnswers: [],
-                quizCompleted: false,
-                quizResult: '',
+        // Quiz functionality
+        const quizData = [
+            {
+                question: "Choose the correct sentence:",
+                options: ["I am student.", "I am a student.", "I a student.", "I the student."],
+                correctAnswer: 1
+            },
+            {
+                question: "What's the past tense of 'go'?",
+                options: ["Goed", "Gone", "Went", "Going"],
+                correctAnswer: 2
+            },
+            {
+                question: "Which sentence is in the present perfect tense?",
+                options: ["I will visit London next year.", "I visited London last year.", "I am visiting London now.", "I have visited London twice."],
+                correctAnswer: 3
+            },
+            {
+                question: "Choose the correct conditional sentence:",
+                options: ["If it rains, I stay at home.", "If it rains, I stayed at home.", "If it rains, I will stay at home.", "If it rains, I would stay at home."],
+                correctAnswer: 2
+            },
+            {
+                question: "Which word is a synonym for 'beautiful'?",
+                options: ["Ugly", "Pretty", "Horrible", "Disgusting"],
+                correctAnswer: 1
+            }
+        ];
 
-                get currentQuestion() {
-                    return this.questions[this.currentQuestionIndex];
-                },
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
 
-                selectAnswer(index) {
-                    this.userAnswers[this.currentQuestionIndex] = index;
-                },
+        const quizContainer = document.getElementById('quizContainer');
+        const quizQuestions = document.getElementById('quizQuestions');
+        const quizResult = document.getElementById('quizResult');
+        const currentQuestion = document.getElementById('currentQuestion');
+        const answerOptions = document.getElementById('answerOptions');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const resultText = document.getElementById('resultText');
+        const retakeButton = document.getElementById('retakeButton');
 
-                nextQuestion() {
-                    if (this.currentQuestionIndex < this.questions.length - 1) {
-                        this.currentQuestionIndex++;
-                    }
-                },
+        function showQuestion() {
+            const question = quizData[currentQuestionIndex];
+            currentQuestion.textContent = question.question;
+            answerOptions.innerHTML = '';
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('w-full', 'text-left', 'p-4', 'rounded', 'border', 'border-gray-300', 'hover:bg-gray-100', 'transition');
+                button.addEventListener('click', () => selectAnswer(index));
+                answerOptions.appendChild(button);
+            });
+            updateButtons();
+        }
 
-                previousQuestion() {
-                    if (this.currentQuestionIndex > 0) {
-                        this.currentQuestionIndex--;
-                    }
-                },
+        function selectAnswer(index) {
+            userAnswers[currentQuestionIndex] = index;
+            updateButtons();
+        }
 
-                completeQuiz() {
-                    let correctAnswers = 0;
-                    this.questions.forEach((question, index) => {
-                        if (this.userAnswers[index] === question.correctAnswer) {
-                            correctAnswers++;
-                        }
-                    });
-
-                    const percentage = (correctAnswers / this.questions.length) * 100;
-
-                    if (percentage >= 80) {
-                        this.quizResult = "Advanced - You have an excellent grasp of English!";
-                    } else if (percentage >= 60) {
-                        this.quizResult = "Intermediate - You have a good understanding of English, but there's room for improvement.";
-                    } else {
-                        this.quizResult = "Beginner - You're just starting your English journey. Keep learning!";
-                    }
-
-                    this.quizCompleted = true;
-                },
-
-                resetQuiz() {
-                    this.currentQuestionIndex = 0;
-                    this.userAnswers = [];
-                    this.quizCompleted = false;
-                    this.quizResult = '';
-                }
+        function updateButtons() {
+            prevButton.style.display = currentQuestionIndex > 0 ? 'block' : 'none';
+            if (currentQuestionIndex === quizData.length - 1) {
+                nextButton.textContent = 'Finish Quiz';
+            } else {
+                nextButton.textContent = 'Next';
             }
         }
+
+        function showResult() {
+            const correctAnswers = userAnswers.filter((answer, index) => answer === quizData[index].correctAnswer).length;
+            const percentage = (correctAnswers / quizData.length) * 100;
+
+            let level;
+            if (percentage >= 80) {
+                level = "Advanced - You have an excellent grasp of English!";
+            } else if (percentage >= 60) {
+                level = "Intermediate - You have a good understanding of English, but there's room for improvement.";
+            } else {
+                level = "Beginner - You're just starting your English journey. Keep learning!";
+            }
+
+            resultText.textContent = level;
+            quizQuestions.style.display = 'none';
+            quizResult.style.display = 'block';
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            quizQuestions.style.display = 'block';
+            quizResult.style.display = 'none';
+            showQuestion();
+        }
+
+        prevButton.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+            } else {
+                showResult();
+            }
+        });
+
+        retakeButton.addEventListener('click', resetQuiz);
+
+        // Initialize the quiz
+        showQuestion();
     </script>
 </body>
 </html>
