@@ -7,7 +7,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
     <script>
         tailwind.config = {
             theme: {
@@ -44,50 +46,10 @@
                 }
             }
         }
-
-        document.addEventListener('alpine:init', () => {
-            // Sticky navigation with color change
-            Alpine.data('stickyNav', () => ({
-                scrolled: false,
-                init() {
-                    window.addEventListener('scroll', () => {
-                        this.scrolled = window.scrollY > 100;
-                    });
-                }
-            }));
-
-            // Scroll smooth effect
-            Alpine.data('scrollSmooth', () => ({
-                scrollToSection(event) {
-                    event.preventDefault();
-                    const targetId = event.target.getAttribute("href").substring(1);
-                    document.getElementById(targetId).scrollIntoView({ behavior: "smooth" });
-                }
-            }));
-
-            // Modal for contact form
-            Alpine.data('contactModal', () => ({
-                open: false,
-                toggle() {
-                    this.open = !this.open;
-                }
-            }));
-
-            // Animation on section reveal
-            ScrollReveal().reveal('.reveal', {
-                duration: 1000,
-                origin: 'bottom',
-                distance: '50px',
-                easing: 'ease-in-out',
-            });
-        });
     </script>
-    <style>
-        [x-cloak] { display: none !important; }
-    </style>
 </head>
-<body class="font-poppins antialiased bg-gray-50 text-gray-800" x-data="stickyNav">
-  <header :class="{ 'bg-sunrise-500 shadow-md': scrolled }" class="bg-white shadow-sm sticky top-0 z-50">
+<body class="font-poppins antialiased bg-gray-50 text-gray-800">
+  <header x-data="{ isOpen: false }" class="bg-white shadow-sm sticky top-0 z-50">
     <nav class="container mx-auto px-6 py-3">
         <div class="flex justify-between items-center">
             <div class="flex items-center">
@@ -99,12 +61,12 @@
                     </span>
                 </a>
             </div>
-            <div class="hidden md:flex items-center space-x-8" @click="scrollSmooth">
-                <a href="#home" class="text-gray-700 hover:text-sunrise-500 transition" @click="scrollToSection">Home</a>
-                <a href="#courses" class="text-gray-700 hover:text-sunrise-500 transition" @click="scrollToSection">Courses</a>
-                <a href="#about" class="text-gray-700 hover:text-sunrise-500 transition" @click="scrollToSection">About Us</a>
-                <a href="#testimonials" class="text-gray-700 hover:text-sunrise-500 transition" @click="scrollToSection">Testimonials</a>
-                <a href="#contact" class="bg-sunrise-500 text-white px-4 py-2 rounded-full hover:bg-sunrise-600 transition" @click="scrollToSection">Contact Us</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-sunrise-500 transition">Home</a>
+                <a href="#courses" class="text-gray-700 hover:text-sunrise-500 transition">Courses</a>
+                <a href="#about" class="text-gray-700 hover:text-sunrise-500 transition">About Us</a>
+                <a href="#testimonials" class="text-gray-700 hover:text-sunrise-500 transition">Testimonials</a>
+                <a href="#contact" class="bg-sunrise-500 text-white px-4 py-2 rounded-full hover:bg-sunrise-600 transition">Contact Us</a>
             </div>
             <button @click="isOpen = !isOpen" class="md:hidden">
                 <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
@@ -114,104 +76,176 @@
             </button>
         </div>
         <div x-show="isOpen" x-transition class="md:hidden mt-4">
-            <a href="#home" class="block py-2 text-gray-700 hover:text-sunrise-500" @click="scrollToSection">Home</a>
-            <a href="#courses" class="block py-2 text-gray-700 hover:text-sunrise-500" @click="scrollToSection">Courses</a>
-            <a href="#about" class="block py-2 text-gray-700 hover:text-sunrise-500" @click="scrollToSection">About Us</a>
-            <a href="#testimonials" class="block py-2 text-gray-700 hover:text-sunrise-500" @click="scrollToSection">Testimonials</a>
-            <a href="#contact" class="block py-2 text-sunrise-500 font-semibold" @click="scrollToSection">Contact Us</a>
+            <a href="#home" class="block py-2 text-gray-700 hover:text-sunrise-500">Home</a>
+            <a href="#courses" class="block py-2 text-gray-700 hover:text-sunrise-500">Courses</a>
+            <a href="#about" class="block py-2 text-gray-700 hover:text-sunrise-500">About Us</a>
+            <a href="#testimonials" class="block py-2 text-gray-700 hover:text-sunrise-500">Testimonials</a>
+            <a href="#contact" class="block py-2 text-sunrise-500 font-semibold">Contact Us</a>
         </div>
     </nav>
 </header>
 
     <main>
-        <section id="home" class="bg-gradient-to-r from-ocean-500 to-sunrise-500 text-white py-20 reveal">
+        <!-- Home Section -->
+        <section id="home" class="bg-gradient-to-r from-ocean-500 to-sunrise-500 text-white py-20">
             <div class="container mx-auto px-6">
                 <div class="flex flex-col md:flex-row items-center">
                     <div class="md:w-1/2 mb-10 md:mb-0">
-                        <h1 class="text-4xl md:text-6xl font-bold mb-4">Illuminate Your Language Journey</h1>
-                        <p class="text-xl mb-8">Join Sunrise English Center and brighten your future with fluent English skills.</p>
-                        <a href="#courses" class="bg-white text-ocean-500 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition" @click="scrollToSection">Explore Courses</a>
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6">Illuminate Your Language Journey</h1>
+                        <p class="text-lg mb-6">Discover our world-class English courses designed to help you achieve fluency and confidence.</p>
+                        <a href="#contact" class="bg-white text-ocean-500 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition">Get Started</a>
                     </div>
-                    <div class="md:w-1/2">
-                        <img src="sunrise.jpg" alt="Students learning English" class="rounded-lg shadow-xl">
+                    <div class="md:w-1/2 flex justify-center">
+                        <img src="./hero-image.jpg" alt="Language Learning" class="w-full max-w-md rounded-lg shadow-lg">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="courses" class="py-20 bg-white reveal">
+        <!-- Courses Section -->
+        <section id="courses" class="py-20">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12">Our Courses</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Courses content -->
+                <h2 class="text-3xl font-bold mb-12 text-center">Our Courses</h2>
+                <div id="courses" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Course items here -->
                 </div>
-                <div class="text-center mt-12">
-                    <a href="#" class="bg-sunrise-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-sunrise-600 transition">View All Courses</a>
+                <div id="loadMoreContainer" class="text-center">
+                    <!-- Load More Button will be added here by JS -->
                 </div>
             </div>
         </section>
 
-        <section id="about" class="py-20 bg-gray-100 reveal">
+        <!-- About Us Section -->
+        <section id="about" class="bg-gray-100 py-20">
             <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-10 md:mb-0">
-                        <img src="about-us.jpg" alt="Our teaching approach" class="rounded-lg shadow-xl">
-                    </div>
-                    <div class="md:w-1/2 md:pl-12">
-                        <h2 class="text-3xl font-bold mb-4">About Us</h2>
-                        <p class="text-lg mb-4">At Sunrise English Center, we believe in empowering our students with the confidence to communicate effectively in English.</p>
-                        <a href="#contact" class="bg-ocean-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-ocean-600 transition" @click="scrollToSection">Contact Us</a>
-                    </div>
-                </div>
+                <h2 class="text-3xl font-bold mb-6 text-center">About Us</h2>
+                <p class="text-lg mb-6 text-center">We are dedicated to providing high-quality English education to help you succeed.</p>
+                <!-- Additional content about the center -->
             </div>
         </section>
 
-        <section id="testimonials" class="py-20 bg-white reveal">
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center mb-12">What Our Students Say</h2>
-                <div class="flex overflow-x-hidden">
-                    <!-- Testimonials content -->
-                </div>
-                <div class="flex justify-center mt-8">
-                    <button class="bg-ocean-500 text-white px-3 py-1 rounded-full mx-2 hover:bg-ocean-600 transition">Prev</button>
-                    <button class="bg-ocean-500 text-white px-3 py-1 rounded-full mx-2 hover:bg-ocean-600 transition">Next</button>
-                </div>
-                <!-- Comments Section -->
-                <div class="mt-12">
-                    <h3 class="text-2xl font-semibold">Leave a Comment</h3>
-                    <textarea class="w-full p-4 mt-4 border rounded-lg" rows="4" placeholder="Write your comment here..."></textarea>
-                    <button class="bg-sunrise-500 text-white px-6 py-2 mt-4 rounded-full hover:bg-sunrise-600 transition">Submit</button>
+                <h2 class="text-3xl font-bold mb-12 text-center">What Our Students Say</h2>
+                <div id="testimonials" class="flex overflow-hidden">
+                    <!-- Testimonial items here -->
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="py-20 bg-gray-100 reveal">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold mb-12">Get In Touch</h2>
-                <button @click="contactModal.toggle" class="bg-sunrise-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-sunrise-600 transition">Contact Us</button>
-                <div x-show="contactModal.open" x-cloak class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" @click.self="contactModal.toggle">
-                    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-                        <h3 class="text-2xl font-bold mb-4">Contact Form</h3>
-                        <form>
-                            <!-- Form content remains unchanged -->
-                            <div class="mt-6 text-right">
-                                <button @click="contactModal.toggle" class="bg-red-500 text-white px-4 py-2 rounded-full font-semibold hover:bg-red-600 transition">Close</button>
-                            </div>
-                        </form>
+        <!-- Contact Us Section -->
+        <section id="contact" class="bg-gray-100 py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-6 text-center">Contact Us</h2>
+                <form id="contactForm" class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
+                    <div class="mb-4">
+                        <label for="name" class="block text-lg font-semibold mb-2">Name</label>
+                        <input type="text" id="name" class="w-full border border-gray-300 rounded-lg p-3" required>
                     </div>
-                </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-lg font-semibold mb-2">Email</label>
+                        <input type="email" id="email" class="w-full border border-gray-300 rounded-lg p-3" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-lg font-semibold mb-2">Message</label>
+                        <textarea id="message" class="w-full border border-gray-300 rounded-lg p-3" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="bg-sunrise-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-sunrise-600 transition">Send Message</button>
+                </form>
             </div>
         </section>
     </main>
 
     <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-6">
-            <p class="text-center">&copy; 2024 Sunrise English Center. All rights reserved.</p>
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Sunrise English Center. All rights reserved.</p
+            <p>&copy; 2024 Sunrise English Center. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-        // Parallax effect, automatic testimonial slider, and contact form notification are already initialized in previous script
+        // Load More Courses
+        document.addEventListener('DOMContentLoaded', function() {
+            const courses = [
+                { title: 'Beginner English', description: 'Start your journey with basic English skills.' },
+                { title: 'Intermediate English', description: 'Enhance your language skills and confidence.' },
+                { title: 'Advanced English', description: 'Master English for professional and academic purposes.' },
+                { title: 'Business English', description: 'Learn English for business and corporate environments.' },
+                { title: 'IELTS Preparation', description: 'Prepare for the IELTS exam with expert guidance.' },
+                { title: 'Conversation Classes', description: 'Improve your fluency and speaking skills.' }
+            ];
+            const coursesContainer = document.getElementById('courses');
+            const loadMoreContainer = document.getElementById('loadMoreContainer');
+            let currentCourses = 3;
+
+            function loadCourses() {
+                coursesContainer.innerHTML = '';
+                for (let i = 0; i < currentCourses; i++) {
+                    if (courses[i]) {
+                        const courseItem = document.createElement('div');
+                        courseItem.className = 'bg-white p-6 rounded-lg shadow-lg text-center';
+                        courseItem.innerHTML = `
+                            <h3 class="text-xl font-bold mb-2">${courses[i].title}</h3>
+                            <p>${courses[i].description}</p>
+                        `;
+                        coursesContainer.appendChild(courseItem);
+                    }
+                }
+                if (currentCourses >= courses.length) {
+                    loadMoreContainer.innerHTML = '';
+                } else {
+                    loadMoreContainer.innerHTML = '<button id="loadMore" class="bg-ocean-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-ocean-600 transition">Load More</button>';
+                }
+            }
+
+            loadCourses();
+
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.id === 'loadMore') {
+                    currentCourses += 3;
+                    loadCourses();
+                }
+            });
+        });
+
+        // Load Testimonials
+        document.addEventListener('DOMContentLoaded', function() {
+            const testimonials = [
+                { name: 'John Doe', feedback: 'This center has helped me immensely in improving my English.' },
+                { name: 'Jane Smith', feedback: 'The instructors are amazing and very supportive!' },
+                { name: 'Emily Johnson', feedback: 'I am now confident in my English skills, thanks to Sunrise.' }
+            ];
+            const testimonialsContainer = document.getElementById('testimonials');
+
+            testimonials.forEach(testimonial => {
+                const testimonialItem = document.createElement('div');
+                testimonialItem.className = 'flex-shrink-0 w-64 p-4';
+                testimonialItem.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                        <p class="text-lg mb-4">"${testimonial.feedback}"</p>
+                        <p class="font-semibold text-ocean-500">- ${testimonial.name}</p>
+                    </div>
+                `;
+                testimonialsContainer.appendChild(testimonialItem);
+            });
+        });
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                alert('Thank you, ' + name + '! Your message has been sent successfully.');
+                document.getElementById('contactForm').reset();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
     </script>
 </body>
 </html>
