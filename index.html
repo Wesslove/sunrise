@@ -136,7 +136,7 @@
                 <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg" id="quizContainer">
                     <div id="quizQuestions">
                         <h3 class="text-xl font-semibold mb-4" id="currentQuestion"></h3>
-                        <div class="space-y-4" id="answerOptions"></div>
+                        <form id="answerOptions" class="space-y-4"></form>
                         <div class="mt-6 flex justify-between">
                             <button id="prevButton" class="bg-ocean-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-ocean-600 transition">Previous</button>
                             <button id="nextButton" class="bg-sunrise-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-sunrise-600 transition">Next</button>
@@ -472,11 +472,19 @@
             currentQuestion.textContent = question.question;
             answerOptions.innerHTML = '';
             question.options.forEach((option, index) => {
-                const button = document.createElement('button');
-                button.textContent = option;
-                button.classList.add('w-full', 'text-left', 'p-4', 'rounded', 'border', 'border-gray-300', 'hover:bg-gray-100', 'transition');
-                button.addEventListener('click', () => selectAnswer(index));
-                answerOptions.appendChild(button);
+                const label = document.createElement('label');
+                label.classList.add('flex', 'items-center', 'p-4', 'rounded', 'border', 'border-gray-300', 'hover:bg-gray-100', 'transition');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.name = 'answer';
+                checkbox.value = index;
+                checkbox.addEventListener('change', () => selectAnswer(index));
+                const span = document.createElement('span');
+                span.textContent = option;
+                span.classList.add('ml-2');
+                label.appendChild(checkbox);
+                label.appendChild(span);
+                answerOptions.appendChild(label);
             });
             updateButtons();
         }
